@@ -26,12 +26,13 @@ class MyAppState extends State<MyApp> {
   // state
   List<QuestionType> questions = [
     QuestionType(
-        questionBody: 'Some question 1', answersBody: ['Answer 1', 'Answer 2']),
+        questionBody: 'What t-shirt would you like to wear?',
+        answersBody: ['Nike M - Men ', 'Adidas S Sleeveless - Men', 'Gucci S']),
     QuestionType(
-        questionBody: 'Some question 2', answersBody: ['Answer 3', 'Answer 4'])
+        questionBody: 'What jeans would you like to wear?',
+        answersBody: ['Levi\'s size 52', 'Calvin Klein size 12'])
   ];
   int question = 0;
-
 
   // functions
   void buttonClick() {
@@ -43,28 +44,30 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Hello World",
+        title: "Dushko - 191143",
         home: Scaffold(
-          appBar: AppBar(title: const Text('Hello World')),
+          appBar: AppBar(title: const Text('Dushko - 191143')),
           body: Column(
             children: [
-              Question(questions
-                  .elementAt(question)
-                  .questionBody),
-              Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 30),
-                  child: Column(
-                    verticalDirection: VerticalDirection.down,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ...(questions
-                          .elementAt(question)
-                          .answersBody
-                          .map((e) => Answer(buttonClick, e)))
-                    ],
-                  ))
+              if (question < questions.length) ...[
+                Question(questions.elementAt(question).questionBody),
+                Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(top: 30),
+                    child: Column(
+                      verticalDirection: VerticalDirection.down,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        ...(questions
+                            .elementAt(question)
+                            .answersBody
+                            .map((e) => Answer(buttonClick, e)))
+                      ],
+                    ))
+              ] else if (question >= questions.length) ...[
+                Question('Thanks for answering!'),
+              ]
             ],
           ),
         ));

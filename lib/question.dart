@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class Question extends StatelessWidget {
   final String _questionBody;
 
-  const Question(this._questionBody, {super.key});
+  Question(this._questionBody, {super.key});
+
+  TextStyle textStyle = const TextStyle(fontSize: 20, color: Colors.blue);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class Question extends StatelessWidget {
         child: Text(
           _questionBody,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 20, color: Colors.blueAccent),
+          style: textStyle,
         ));
   }
 }

@@ -4,10 +4,24 @@ class Answer extends StatelessWidget {
   final String _answerBody;
   final VoidCallback answerClick;
 
-  const Answer(this.answerClick, this._answerBody, {super.key});
+  Answer(this.answerClick, this._answerBody, {super.key});
+
+  ButtonStyle buttonStyle = ElevatedButton.styleFrom(
+    backgroundColor: Colors.green,
+  );
+  TextStyle textStyle = const TextStyle(color: Colors.red);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: answerClick, child: Text(_answerBody));
+    return Container(
+        alignment: Alignment.center,
+        child: ElevatedButton(
+          onPressed: answerClick,
+          style: buttonStyle,
+          child: Text(
+            _answerBody,
+            style: textStyle,
+          ),
+        ));
   }
 }
