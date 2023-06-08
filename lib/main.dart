@@ -1,13 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:mis_lab2/answer.dart';
+import 'package:mis_lab2/question.dart';
 
-void main() {
-  runApp(HelloWorld());
+class QuestionType {
+  String questionBody;
+  List<String> answersBody;
+
+  QuestionType({required this.questionBody, required this.answersBody});
 }
 
-class HelloWorld extends StatelessWidget {
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  List<QuestionType> questions = [
+    QuestionType(
+        questionBody: 'Some question 1', answersBody: ['Answer 1', 'Answer 2']),
+    QuestionType(
+        questionBody: 'Some question 2', answersBody: ['Answer 3', 'Answer 4'])
+  ];
+  int question = 0;
+
   void buttonClick() {
-    print('asd1');
-    print('asd1');
+    setState(() {
+      question += 1;
+    });
   }
 
   @override
@@ -18,12 +45,21 @@ class HelloWorld extends StatelessWidget {
           appBar: AppBar(title: const Text('Hello World')),
           body: Column(
             children: [
-              ElevatedButton(
-                  onPressed: buttonClick, child: const Text('Button')),
-              ElevatedButton(
-                  onPressed: buttonClick, child: const Text('Button')),
-              ElevatedButton(
-                  onPressed: buttonClick, child: const Text('Button')),
+              Question(questions.elementAt(question).questionBody),
+              Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 30),
+                  child: Column(
+                    verticalDirection: VerticalDirection.down,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      ...(questions
+                          .elementAt(question)
+                          .answersBody
+                          .map((e) => Answer(buttonClick, e)))
+                    ],
+                  ))
             ],
           ),
         ));
