@@ -23,6 +23,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  // state
   List<QuestionType> questions = [
     QuestionType(
         questionBody: 'Some question 1', answersBody: ['Answer 1', 'Answer 2']),
@@ -31,6 +32,8 @@ class MyAppState extends State<MyApp> {
   ];
   int question = 0;
 
+
+  // functions
   void buttonClick() {
     setState(() {
       question += 1;
@@ -45,7 +48,9 @@ class MyAppState extends State<MyApp> {
           appBar: AppBar(title: const Text('Hello World')),
           body: Column(
             children: [
-              Question(questions.elementAt(question).questionBody),
+              Question(questions
+                  .elementAt(question)
+                  .questionBody),
               Container(
                   alignment: Alignment.center,
                   margin: const EdgeInsets.only(top: 30),
